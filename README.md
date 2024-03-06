@@ -466,18 +466,110 @@ import {useSearchParams} from 'react-router-dom';
 
 // inside component code..
 const [searchParams,setSearchParams]=useSearchParams();
-console.log(searchParams.get('type'));
+console.log(searchParams.get('type')); // to get the value
 ```
 - if your URL look like this: http://localhost:3000/vans then here output will be `null` because there is no type query params here.
 
 - But if your URL: http://localhost:3000/vans?type=rugged then output will be `rugged`
 
 
+  - To **Set** the query params value:
+      - First Way:
+
+      ``` 
+      <Link to='?type=rugged'> Rugged </Link>
+      <Link to='?type=smooth'> Smooth </Link>
+      <Link to=''> Clear Fliter </Link>
+      OR
+      <Link to=".">Clear All</Link>
+      // this will just replace the existing query param and add new 
+      ```
+      - Second Way:
+        - Using setter function that we already have declared.
+        ```
+        <button onClick={()=>setSearchParams("type=rugged")}>Rugged</button> 
+        <button onClick={()=>setSearchParams("type=Smooth)}>Smooth</button> 
+        <button onClick={()=>setSearchParams("")}>Clear All</button> 
+        ```
+        OR
+
+        ```
+        <button onClick={()=>setSearchParams({type:"rugged"})}>Rugged</button> 
+        <button onClick={()=>setSearchParams({type="Smooth"})}>Smooth</button> 
+        <button onClick={()=>setSearchParams({})}>Clear All</button> 
+        ```
+      - Third Way:
+        - If you look at the above 2 approaches we are losing our query params as soon as we clikc another one. So how to do **Merging Query Params**.
+          - First Way (NATIVE WAY):
+
+          ![Alt text](image-3.png)
+
+          - Second Way (React Router Way):
+
+          ![Alt text](image-4.png)
+
+          ```
+          <button onClick={()=>handleFilterChange("type","sith")}>Sith</button> 
+          <button onClick={()=>handleFilterChange("type","Jim")}>Jim</button> 
+          <button onClick={()=>handleFilterChange("type","null")}>Sith</button> 
+          ```
 
 
 
 
+### Link State
+
+- Imagine a website where you see all van types and using filter you find a van and then click back to Vans button to go back where you left have those filter applied as you input.
+
+- Or it could also be the search bar senario where you type and go through the card and when you come back to the search bar your data is lost what you hae typed.
+
+- We need a mechanism where while navigating to the new page from the current, current page needs to send some data to the new page so that if back button is pressed on the new page as it have the data from the current page it give it back to the current page.
+- This can be achived with the help of Link State.
+
+``` 
+// inside component A on clicking below Link it will navigate to component b which has path id
+<Link to={van.id} state={{search:`?${searchParams.toString()}`}}>Van 1</Link>
+```
+
+### useLocation:
+
+- Now we need to catch that state in the new component ie B or new path.
+
+``` 
+import {useLocation} from 'react-router-dom';
+
+// Inside the component...
+
+const location= useLocation();
+console.log(location)
+// O/P: {pathname:'vans/5,search:"",hash:"",state:{search:"type=luxury"},key:"emysjsk"}
+
+const search= location.state?.search || "";
+
+// inside return 
+<Link to={..${search}}></Link>
 
 
+```
+
+
+### 404 Error Page:
+- When the user enter the url that is not present in your routes then you need to render some helper page that will show custom message to the user.
+
+- Just a suggestion to place it at bottom, it works even placed at the Top.
+
+```
+<Routes>
+<Route path="*" element={<h1>No Page Found</h1>}></Route>
+</Routes>
+```
+---
+## Data Layer API:
+
+- Introduced in React Router V6.
+
+- Till now we have build the app in Happy path we havn't really used the core user experience concepts that would elevate the user experience while using our app.
+
+- we havn't hadndle the errors while routing what to do if the data from the api do not receive things like that.
 
 
