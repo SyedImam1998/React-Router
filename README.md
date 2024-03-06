@@ -570,6 +570,14 @@ const search= location.state?.search || "";
 
 - Till now we have build the app in Happy path we havn't really used the core user experience concepts that would elevate the user experience while using our app.
 
-- we havn't hadndle the errors while routing what to do if the data from the api do not receive things like that.
+- we havn't handled the errors while routing what to do if the data from the api do not receive things like that.
+
+- Here we will be loading the data first and then upon checking the data we will route the user to that path.
+
+- If you see traditionally we always route the user to a specific path first and then start loading the data and with this approach there is alot of boilerplate code  at different routes for checking the loading state, error handling state and data handling state.
+
+
+### Loaders:
+- By Default we have been using useEffect for fetching data.
 
 
