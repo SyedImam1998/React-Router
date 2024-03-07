@@ -148,7 +148,7 @@ console.log(params.type) /// will give you the type
 ```
 
 #### Outlet:
-
+- Similar to prop.children for Routes
 
 - This will take the child route under the parent route and render on the screen when url matches.
 
@@ -578,6 +578,249 @@ const search= location.state?.search || "";
 
 
 ### Loaders:
-- By Default we have been using useEffect for fetching data.
+- By Default we have been using useEffect for fetching data where it is going to fetch data after going to the specific route.
+
+- But here at Loader there will be slight delay in going to the specific url/route because loaders will first load data first and upon reciving data only it will go to that route which was requested.
 
 
+To use the Data Layer Api in our app we need to make some changes in our App.js file where we have wrapped the routes with `<BrowserRouter></BrowserRouter> `  and BrowserRouter donot support the DataLayer Api.
+
+#### SETUP:
+
+- Create router.jsx file in you src/ folder 
+- Add this code
+``` 
+import { createBrowserRouter } from "react-router-dom";
+import App from "./App";
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  
+]);
+
+export default router;
+```
+- Now write code like this in index.js file as shown below.
+
+```
+// Index.jsx
+
+import { createRoot } from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
+
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
+
+root.render(<RouterProvider router={router} />);
+
+
+```
+
+- Now when you reload the page you can see App component being mounted on the screen.
+
+
+#### Transition from BrowserRouter to createBrowserRouter
+- If you look at the  code we have written in broswer this how code will look like.
+
+FROM THIS 
+
+``` 
+ <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/Dashboard" element={<Dashboard />} />
+  </Routes>
+```
+
+TO THIS
+
+``` 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/home",
+    element: <Home />,
+  },
+  {
+    path: "/About",
+    element: <About />,
+  },
+  {
+    path: "/Dashboard",
+    element: <Dashboard />,
+  },
+]);
+```
+
+#### Another way to transition:
+
+- Inside index.jsx file.
+
+``` 
+import {createBrowserRouter,createRoutesFromElements,RouterProvider,Route} from react-router-dom.
+
+
+const router=createBrowserRouter(createRoutesFromElements(
+
+   <Route path="/" element={<Layout />}>
+      <Route index element={<Home />} />
+      <Route path="/About" element={<About />} />
+      <Route path="/Dashboard" element={<Dashboard />} />
+    </Route>
+
+))
+
+function App(){
+  return (
+    <RouterProvider router={router}/>
+  )
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>)
+```
+
+###  Using Loaders
+- Add the loader function that has data that could also be the API fetch function.
+``` 
+//Home.jsx 
+
+export function loader() {
+  return "The data is here";
+}
+
+const Home = () => {
+  return (
+    <div>
+      <h1>Hello From Home</h1>
+    </div>
+  );
+};
+
+export default Home;
+
+```
+
+``` 
+// App.jsx
+
+import Home, { loader as homePageLoader } from "./screen/Home";
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Home />} loader={homePageLoader} />
+      <Route path="/About" element={<About />} />
+      <Route path="/Dashboard" element={<Dashboard />} />
+    </Route>
+  )
+);
+```
+
+- But how can we get the data into the home.jsx component.
+
+#### useLoaderData:
+
+- Now inside the Home.jsx component use useLoaderData Hook.
+
+``` 
+import { useLoaderData } from "react-router-dom";
+
+export function loader() {
+  return "The data is here";
+}
+
+const Home = () => {
+  const data = useLoaderData();
+  console.log(data); //O/P: The data is here
+  return (
+    <div>
+      <h1>Hello From Home</h1>
+    </div>
+  );
+};
+
+export default Home;
+```
+
+- So if you notice here we are not running the loader code inside the Home.jsx. Now it is the duty of the react router to execute it and pass the data to the Home.jsx component so due to this there will slight delay in loading of the page.
+
+- This is how you can load the data.
+
+``` 
+const Home = () => {
+  const data = useLoaderData();
+  console.log(data);
+  return (
+    <div>
+      <h1>Hello From Home</h1>
+      <ul>
+        {data.map((item) => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+```
+
+###  Handling Errors:
+- Let say while fetch data from the api if an error  happen how can we handle it.
+
+#### Error while fetch happened:
+``` 
+export const dataFetchApi = async () => {
+  //   const response = await fetch("http://localhost:4000/getData?page=1");
+  //   const data = await response.json();
+  //   console.log(data.data);
+  //   return data.data;
+  throw new Error("Fetch gone wrong");
+};
+
+```
+
+#### errorElement:
+- At the route itself we can add another prop called errorElement.
+
+``` 
+<Route 
+      path="/home"
+      element={<Home/>} 
+      errorElement={<h1>some went wrong</h1>}>
+ </Route>
+```
+- But if we just place some thing went wrong doesn't really explian the issue to the user. how can we fine tune this more.
+
+#### useRouterError:
+- This hook will help us to display more info about the error.
+- you can get the message that you have used/declared in new Error() with error.message.
+
+- You can have component like this and use useRouterError inside the error.jsx file.
+
+```
+import { useRouteError } from "react-router-dom";
+
+const Error = () => {
+  const error = useRouteError();
+  console.log(error);
+  return <div>{error.message}</div>;
+};
+export default Error;
+```
+- and then later add that component to the error element props in route
+``` 
+ <Route index element={<Home />} loader={homePageLoader} errorElement={<Error />} />
+```
+
+### Protected Routes
+- It is pattern that we use to protect some routes.
+- Example like only logged In users can access the data.
+- Normally how traditional protected routes work in react is let say you have a twitter/posts path and you want ony authenticated users to be in that path. So here in /twitter/posts path you do useEffect that will check the authentication if all things look ok then you do fetching of user-specific content.
+- But if the user is not authenticated in the useEffect itself we will be navigating the user to the login page.
+- Here Data Layer Api propose the idea where first we will check the authetication of the user if all OK then only we will route the user to /posts path if not navigate him to the login page
