@@ -464,7 +464,8 @@ window.history.replaceState({}, '', updatedURL);
 ``` 
 import {useSearchParams} from 'react-router-dom';
 
-// inside component code..
+// inside component code
+
 const [searchParams,setSearchParams]=useSearchParams();
 console.log(searchParams.get('type')); // to get the value
 ```
@@ -823,4 +824,169 @@ export default Error;
 - Example like only logged In users can access the data.
 - Normally how traditional protected routes work in react is let say you have a twitter/posts path and you want ony authenticated users to be in that path. So here in /twitter/posts path you do useEffect that will check the authentication if all things look ok then you do fetching of user-specific content.
 - But if the user is not authenticated in the useEffect itself we will be navigating the user to the login page.
-- Here Data Layer Api propose the idea where first we will check the authetication of the user if all OK then only we will route the user to /posts path if not navigate him to the login page
+- Here Data Layer Api propose the idea where first we will check the authetication of the user if all OK then only we will route the user to /posts path if not navigate him to the login page.
+
+
+#### Setup:
+- Here we will be wrapping all our important routes with the something that is similar to Layout like. if you remember we have used layout to share the ui design to the different routes in the same way we wrap the all the protected routes with AuthRequiredLayout.jsx.
+
+- Create file called AuthRequiredLayout.jsx and now this layout will have the logic to check the authentication and navigate the users to the specific routes.
+- There is **security issue** with this approach we have discussed this below section as well.
+
+#### Navigate:
+
+- Component from React router that can help us to navigate the user to the specific path without the user interaction.
+
+
+``` 
+// AuthRequiredLayout.jsx file...
+
+
+import { Navigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+
+const AuthRequiredLayout = () => {
+  const isLoggedIn = false;
+  if (!isLoggedIn) return <Navigate to="/login" />;
+  return <Outlet />;
+};
+
+export default AuthRequiredLayout;
+```
+
+``` 
+// App.jsx File
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      <Route element={<AuthRequiredLayout />}> /// here
+            <Route index element={<Home />} loader={homePageLoader}errorElement={<Error />} />
+            <Route path="/About" element={<About />} />
+            <Route path="/Dashboard" element={<Dashboard />} />
+      </Route>
+      <Route path="/login" element={<LoginPage />} />
+    </Route>
+  )
+);
+```
+
+- Here if you see we have wrapped our all our routes with AuthRequiredLayout route now any one that goes to that any of its child routes has firt go throught the logic written in AuthRequiredLayout component and then it can access the child routes.
+
+- Here the Loading of fetch requests happen **Parallel** not one after the other.
+
+
+### Parallel Loader Concept:
+
+- let say we have parent route that has few nested routes.
+- parent route has a loader which will check the authentication and the return the outlet.
+- child routes have their own loader to fetch data from the api and show that to the users.
+
+- Demo of parallel loading
+
+![Alt text](image-5.png)
+
+- Above you can see loader that is present in nested child route /about got logged first than the parent protected route this indicated that loaders do excecute parallely.
+
+####  Security Issue:
+- here the issue as loaders are running paralley even though protected route auth logic navigated the user back to login page as the nested route loader ran parallely if it has the api calls we can see the results  in Developer tools.
+
+**Example**:
+Here if you notice i have wrapped my child routes with AuthRequired component where it has the auth logic even though AuthRequired component is doing validation even though authentication failed but still loader inside the /About got executed.
+
+![Alt text](image-6.png)
+
+![Alt text](image-7.png)
+
+
+#### Loaders Params Feature:
+- Now you loader will able to get the params if your Url have them.
+
+- Let say you have route like this.
+
+``` 
+// in App.jsx
+
+import {loader as vanDetailsLoader} from '../screen/Vandetails.jsx";
+
+<Route> path="vans/:id" element={<VanDetails/>} loader={vanDetailsLoader}/>
+
+// In VanDetails.jsx
+
+export const loader({params}){
+  console.log(params); O/P: {id:"1"}
+  return getVanDetails()
+}
+```
+
+### Solution for Parallel Loaders:
+It is better to add individual loader for each route.
+
+```
+// in app.jsx 
+
+<Route path="/vanDetails element={VanDetails} loader={async()=>{return await auth()}}/>
+
+// in auth.js
+
+import { redirect } from "react-router-dom";
+
+export async function auth() {
+  console.log("auth");
+  const isLoggedIn = false;
+  if (!isLoggedIn) {
+    throw redirect("/login");
+  }
+}
+
+```
+
+- if you already have loader that fetches data from the API the you can declare like this in you existing loader function.
+
+``` 
+// in app.jsx
+
+export async function loader() {
+  await auth();
+  return dataFetchApi();
+}
+```
+
+### Show Message After Redirection:
+
+- While we are able to quietly navigate or redirect the user to the login page but still there is room for improvement where we can show message to the user say **You must login first**
+
+#### Using Navigate:
+- we can achieve this by using Navigate component which also has state props just like NavLink.
+- And After navigating we can use useLocation hook to get state as we have used before.
+
+``` 
+const AuthRequiredLayout = () => {
+  console.log("AuthRequiredLayout");
+  const isLoggedIn = false;
+  if (!isLoggedIn)
+    return (
+      <Navigate to="/login" state={{ message: "You must log in first !!!" }} />
+    );
+  return <Outlet />;
+};
+
+export default AuthRequiredLayout;
+```
+
+#### Passing message in Query Params in redirect
+- if your using loaders where you should be redirect to naviagte the user. there you can add your message in query params and redirect.
+
+``` 
+export async function auth() {
+  console.log("auth");
+  const isLoggedIn = false;
+  if (!isLoggedIn) {
+    throw redirect("/login?message=You must log in first !!!");
+  }
+}
+```
+- **Consume the message**:
+  - To Consume the message in the component.
+
+
+
