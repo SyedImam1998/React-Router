@@ -1183,4 +1183,209 @@ export async function auth() {
         <button>helloo</button>
       </Form>
       ``` 
+### useActionData:
+
+- Now lets say we have action function which will make an api call to check the credentails of the user ie username and password what if the credentials are incorrect how can we handle it and show proper error message to the user.
+
+- what if something like this happen
+
+``` 
+export async function action({ request, params }) {
+  const formData = await request.formData();
+  const username = formData.get("username");
+  const password = formData.get("password");
+  console.log(username, password);
+  throw new Error("NOT OK");
+  // return redirect("/");
+}
+```
+
+- No problem we can handle this by returning it like this.
+
+``` 
+export async function action({ request, params }) {
+  const formData = await request.formData();
+  const username = formData.get("username");
+  const password = formData.get("password");
+  console.log(username, password);
+  return "NOT OK";
+}
+```
+#### useActionData:
+- similar to useLoaderData.
+
+```
+// login.jsx 
+const error = useActionData();
+
+// inside return
+
+ {error && <h3>{error}</h3>} O/P: Not OK
+```
+
+### useNavigation:
+- let say you are using a state called status that will show on button something like login or logging in when you click on login button.
+
+- as we are doing the api calls in the action function how can we know the status then.
+####  useNavigation:
+
+- here is where useNavigation will come handy it gives us the clear status of any loader/action that is running or idle.
+
+- Declare this inside the component.
+
+``` 
+const navigation = useNavigation();
+console.log(navigation); O/P: { "state": "idle" }
+```
+
+### Know Path
+
+- Let say you put twitter/setting url in the browser and hit enter because as you are not logged in you will be navigated to loggin page and after successfully logging we should navigate the user to the /settings path not / home page.
+
+- So we some how need to know what exactly user wanted to visit before redirecting him to the login page.
+- Here when you try to enter about page as authentication is there you will be navigated to the login page at same time we will be putting /about path  in login url
+``` 
+<Route
+  path="/About"
+  loader={async ({ request }) => {
+    // 1 way to extract url
+    // const url = new URL(request.url);
+    // console.log(url.pathname);
+    // or just do like below....
+    return await auth(request);
+  }}
+  element={<About />}
+/>
+```
+``` 
+// auth.js
+
+
+import { redirect } from "react-router-dom";
+
+export async function auth(request) {
+  console.log("auth");
+  const url = new URL(request.url).pathname;
+  console.log("auth function", url);
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  if (!JSON.parse(isLoggedIn)) {
+    throw redirect(
+      "/login?message=You must log in first !!!&redirectTo=" + url
+    );
+  }
+  return null;
+}
+```
+```
+// loginPage.jsx
+
+export async function action({ request, params }) {
+  const formData = await request.formData();
+  const username = formData.get("username");
+  const password = formData.get("password");
+  console.log(username, password);
+  localStorage.setItem("isLoggedIn", true);
+  const redirectTo = new URL(request.url).searchParams.get("redirectTo");
+  if (redirectTo) {
+    throw redirect(redirectTo);
+  } else {
+    throw redirect("/");
+  }
+  // return "NOT OK";
+  // return redirect("/");
+}
+```
+### Deferring Data:
+- if you look at the current data layer apis where loader function are found that would fetch data from the server so due to this we can see that our page has got some what stuck and there is not feed back to the user saying that it is loading.
+
+
+#### Promises and defer():
+  - **Defer**:
+    - When you use defer in your loader function by returning it.
+    - Traditionally before routing page and loading ui in data layer api's first loader functions are loaded and then page is routed.
+    - But if we defer first page will be routed and then loader will run.
+
+    Change Loader from this 
+    ``` 
+    export async function loader(request) {
+      await auth(request);
+      return await dataFetchApi();
+    }
+    ```
+    TO THIS:
+    
+    ``` 
+    export async function loader(request) {
+      await auth(request);
+      console.log(dataFetchApi()); //Promise
+      const dataPromise=dataFetchApi();
+      return defer({data:dataPromise}) ;
+    }
+    ```
+
+    #### Await:
+    - it is component provided by react router dom.
+
+    - It can be used to surround the code where we expect that async behaviour of code and it will conditionally render once the data is loaded.
+
+    ``` 
+    const Home = () => {
+      const data = useLoaderData();
+      console.log(data); /// O/P: {data:Promise}
+
+      return (
+        <div>
+          <h1>Hello From Home</h1>
+          <Await resolve={data.data}>
+            {(loadedData) => {
+              console.log(loadedData);
+              return (
+                <>
+                  <ul>
+                    {loadedData.map((item) => (
+                      <li key={item.id}>{item.name}</li>
+                    ))}
+                  </ul>
+                </>
+              );
+            }}
+          </Await>
+        </div>
+      );
+    };
+
+    export default Home;
+    ```
+    #### Suspense:
+     - It lets you display a fallback untill its children have finished Loading.
+     - here you will use this to wrap your Await component.
+
+     ``` 
+      <React.Suspense fallback={<h2>Loading Data Please wait</h2>}>
+        <Await resolve={data.data}>
+          {(loadedData) => {
+            console.log(loadedData);
+            return (
+              <>
+                <ul>
+                  {loadedData.map((item) => (
+                    <li key={item.id}>{item.name}</li>
+                  ))}
+                </ul>
+              </>
+            );
+          }}
+        </Await>
+      </React.Suspense>
+     ```
+
+     - This will load the **Loading data please wait** message will be shown to the users untill unless data is fetched.
+
+     **Note**: if you have any interdependent loader where you have 2 loaders one loader is dependent on another then agian you can make you loader function async and make one of the loader await. so this means route transition will not start untill unless await loader (user:await userpromise) as completed once that is completed data loading it make route transition and remaining sync loaders will caught at suspense and loading state will be showed.
+
+     ``` 
+      export async function loader(){
+        return defer({data:dataPromise,user:await userpromise})
+      }
+     ```
 
