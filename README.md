@@ -1,5 +1,17 @@
-# React-Router
+# React-Router-Dom
 
+<p align="center">
+<img src="https://github.com/SyedImam1998/React-Router/assets/52135949/51284c4f-155b-4529-bf3d-859b3b7de2cb" alt="Example Image" width="250" height="200">
+</p>
+
+<p align="center">Easiest and Most Detailed Way to understand React Router Dom.</p>
+<p align="center" style="margin-bottom: 10px;">This Doc was prepared taking inspiration from Bob Ziroll, Scrimba’s Head of Education, to provide a quick guide to developers who have less time to go through the course again but I do recommend checking out the <a href="https://www.youtube.com/watch?v=nDGA3km5He4">Video</a></p> 
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
 
 
 
@@ -61,9 +73,6 @@
 [Suspense](#Suspense) | React Hook to show fallback ui till the await components get rendered.
 
 
-### CodeSand Box Url:
-[CodeSand Box ](https://codesandbox.io/p/sandbox/react-router-d-api-youtube-rds8zz)
-
 
 
 ### Installation
@@ -74,7 +83,7 @@ npm install react-router-dom
 
 ### Setup in React Project
 
-- Wrap the App with browser Router has shown below.
+- Wrap the App with the browser Router has shown below.
 
 ```
 ReactDOM.createRoot(document.getElementById("root")).render(
