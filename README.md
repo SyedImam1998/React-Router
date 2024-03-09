@@ -1,5 +1,14 @@
 # React-Router
 
+
+| Module Name | Description |
+| --- | --- |
+| [Installation](#Installation) | Helps you install the react router package |
+| [Setup in React Project](#Setup-in-React-Project)| Helps you setup the react router dom. 
+| [Element VS Component](#Difference-between-Element-and-Component)|  Understand difference between Element and Component
+
+
+
 ### Installation
 
 ```
