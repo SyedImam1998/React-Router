@@ -7,19 +7,16 @@
 | [Setup in React Project](#Setup-in-React-Project)| Helps you setup the react router dom. 
 | [Element VS Component](#Difference-between-Element-and-Component)|  Understand difference between Element and Component
 [Conditional Rendering in same url](#Conditional-Rendering-in-same-url)| Helps you conditional render the element.
-[Installation](#Installation)| okk
-[Setup in React Project](#Setup-in-React-Project) |ok
-[Difference between Element and Component](#Difference-between-Element-and-Component) |
-[Conditional Rendering in same URL](#Conditional-Rendering-in-same-URL) |
-[Redirection Conditionally](#Redirection-Conditionally) |
-[Link](#Link) |
-[Router Params](#Router-Params) |
-[Nested Routes](#Nested-Routes) |
-[Layout Route](#Layout-Route) |
-[Outlet](#Outlet) |
-[Deep Nested Route](#Deep-Nested-Route) |
-[Relative Routes](#Relative-Routes) |
-[Index](#Index) |
+[Redirection Conditionally](#Redirection-Conditionally) | Help you to redirect user some where went conditons are not met.
+[Link](#Link) | Optimised Version of a href tag
+[Router Params](#Router-Params) | helps you get the data from the url parameter
+[Nested Routes](#Nested-Routes) | Use this when you want to share the common Ui between the same routes.
+[Layout Route](#Layout-Route) | Used in senarios where you want the certain component through out the Routes something like NavBar or Footer.
+[Outlet](#Outlet) | This will take the child route under the parent route and render on the screen when url matches.
+[Deep Nested Route](#Deep-Nested-Route) | Techniques to be used when you have deep nested routes.
+[Relative Routes](#Relative-Routes) | You donot need actually need to have that / at each level of path.
+[Index](#Index) | Used when you want to render child component with parent layouts as default.
+[NavLink](#NavLink)| Used for visual feedback the you opted for the path.
 [Relative Links](#Relative-Links) |
 [Current Route ( . )](#Current-Route--) |
 [Relative Path](#Relative-Path) |
@@ -240,9 +237,9 @@ export const Layout=()=>{
 
 <Route path="/host" element={<HostLayout/>}>
 
-<Route path="/host" element={<Dashboard/>}></Route> (donot use this,use Index Route to Fix)
-<Route path="/host/income" element={<Income/>}></Route>
-<Route path="/reviews" element={<Reviews/>}></Route>
+    <Route path="/host" element={<Dashboard/>}></Route> (donot use this,use Index Route to Fix)
+    <Route path="/host/income" element={<Income/>}></Route>
+    <Route path="/reviews" element={<Reviews/>}></Route>
 
 </Route>
 </Route>
