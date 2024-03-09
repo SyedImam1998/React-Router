@@ -6,6 +6,54 @@
 | [Installation](#Installation) | Helps you install the react router package |
 | [Setup in React Project](#Setup-in-React-Project)| Helps you setup the react router dom. 
 | [Element VS Component](#Difference-between-Element-and-Component)|  Understand difference between Element and Component
+[Conditional Rendering in same url](#Conditional-Rendering-in-same-url)| Helps you conditional render the element.
+[Installation](#Installation)| okk
+[Setup in React Project](#Setup-in-React-Project) |ok
+[Difference between Element and Component](#Difference-between-Element-and-Component) |
+[Conditional Rendering in same URL](#Conditional-Rendering-in-same-URL) |
+[Redirection Conditionally](#Redirection-Conditionally) |
+[Link](#Link) |
+[Router Params](#Router-Params) |
+[Nested Routes](#Nested-Routes) |
+[Layout Route](#Layout-Route) |
+[Outlet](#Outlet) |
+[Deep Nested Route](#Deep-Nested-Route) |
+[Relative Routes](#Relative-Routes) |
+[Index](#Index) |
+[Relative Links](#Relative-Links) |
+[Current Route ( . )](#Current-Route--) |
+[Relative Path](#Relative-Path) |
+[Outlet Context](#Outlet-Context) |
+[Search / Query Parameters](#Search---Query-Parameters) |
+[URLSearchParams (Not Related to React Router)](#URLSearchParams-Not-Related-to-React-Router) |
+[useSearchParams()](#useSearchParams) |
+[useLocation](#useLocation) |
+[Link State](#Link-State) |
+[404 Error Page](#404-Error-Page) |
+[Data Layer API](#Data-Layer-API) |
+[Loaders](#Loaders) |
+[Setup](#SETUP) |
+[Transition from BrowserRouter to createBrowserRouter](#Transition-from-BrowserRouter-to-createBrowserRouter) |
+[Another way to transition](#Another-way-to-transition) |
+[Using Loaders](#Using-Loaders) |
+[Handling Errors](#Handling-Errors) |
+[Error while fetch happened](#Error-while-fetch-happened) |
+[errorElement](#errorElement) |
+[useRouterError](#useRouterError) |
+[Protected Routes](#Protected-Routes) |
+[Setup](#Setup-1) |
+[Navigate](#Navigate) |
+[Form Component](#Form-Component) |
+[Action Setup](#Action-Setup) |
+[useActionData](#useActionData) |
+[useNavigation](#useNavigation) |
+[Know Path](#Know-Path) |
+[Deferring Data](#Deferring-Data) |
+[Promises and defer()](#Promises-and-defer) |
+[Await](#Await) |
+[Suspense](#Suspense) |
+
+
 
 
 
