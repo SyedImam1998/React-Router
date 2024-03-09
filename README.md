@@ -1,6 +1,8 @@
 # React-Router
 
 
+
+
 | Module Name | Description |
 | --- | --- |
 | [Installation](#Installation) | Helps you install the react router package |
@@ -17,40 +19,50 @@
 [Relative Routes](#Relative-Routes) | You donot need actually need to have that / at each level of path.
 [Index](#Index) | Used when you want to render child component with parent layouts as default.
 [NavLink](#NavLink)| Used for visual feedback the you opted for the path.
-[Relative Links](#Relative-Links) |
-[Current Route ( . )](#Current-Route--) |
-[Relative Path](#Relative-Path) |
-[Outlet Context](#Outlet-Context) |
-[Search / Query Parameters](#Search---Query-Parameters) |
-[URLSearchParams (Not Related to React Router)](#URLSearchParams-Not-Related-to-React-Router) |
-[useSearchParams()](#useSearchParams) |
-[useLocation](#useLocation) |
-[Link State](#Link-State) |
-[404 Error Page](#404-Error-Page) |
-[Data Layer API](#Data-Layer-API) |
-[Loaders](#Loaders) |
-[Setup](#SETUP) |
-[Transition from BrowserRouter to createBrowserRouter](#Transition-from-BrowserRouter-to-createBrowserRouter) |
-[Another way to transition](#Another-way-to-transition) |
-[Using Loaders](#Using-Loaders) |
-[Handling Errors](#Handling-Errors) |
-[Error while fetch happened](#Error-while-fetch-happened) |
-[errorElement](#errorElement) |
-[useRouterError](#useRouterError) |
-[Protected Routes](#Protected-Routes) |
-[Setup](#Setup-1) |
-[Navigate](#Navigate) |
-[Form Component](#Form-Component) |
-[Action Setup](#Action-Setup) |
-[useActionData](#useActionData) |
-[useNavigation](#useNavigation) |
-[Know Path](#Know-Path) |
-[Deferring Data](#Deferring-Data) |
-[Promises and defer()](#Promises-and-defer) |
-[Await](#Await) |
-[Suspense](#Suspense) |
+[End](#End)| To restrict the Active route style.
+[Relative Links](#Relative-Links) | Same as Relative Routes but for NavLink/ Link.
+[Current Route ( . )](#Current-Route--) | suggested to use this approach for NavLink to be used for the indexed child route under the parent which shares same URL's
+[Relative Path](#Relative-Path) | This is used for the going back one level backward the path. from /vans/:id to /vans
+[Outlet Context](#Outlet-Context) | when you want pass data from the Parent route to child Routes.
+[useOutletContext](#useOutletContext)| Use this in child route component to get the data that is passed in the parent route context.
+[Search / Query Parameters](#Search---Query-Parameters) | use this when you wnat to extract data from the query parameter or set data in query parameters.
+[URLSearchParams (Not Related to React Router)](#URLSearchParams-Not-Related-to-React-Router) | Native way of extracti ng data form Url.
+[useSearchParams()](#useSearchParams) | implementation of useSearchParams.
+[Link State](#LinkState)| Mechanism to send state data to next page and use it when to try to route to back page. can be used in filters.
+[useLocation](#useLocation) | hook to get the state data that was passed
+[404 Error Page](#404-Error-Page) | use this when user tries to access the page that is not present.
+[Data Layer API](#Data-Layer-API) | Build optimised React App
+[Loaders](#Loaders) | function that runs before routing happens
+[Setup](#SETUP) | Implementation details
+[Transition from BrowserRouter to createBrowserRouter](#Transition-from-BrowserRouter-to-createBrowserRouter) |1st way of Implementation
+[Another way to transition](#Another-way-to-transition) | 2nd way of Implementation
+[Using Loaders](#Using-Loaders) | Implementation of Loaders
+[useLoaderData](#useLoaderData)|use this to get the data returned by the loader.
+[Loaders Params Feature](#Loaders-Params-Feature)| Passing Params to loader function.
+[Handling Errors](#Handling-Errors) | Helps you handle the error
+[Error while fetch happened](#Error-while-fetch-happened) | things to do while doing async operation like throwing error
+[errorElement](#errorElement) | Define element to show message to the user
+[useRouterError](#useRouterError) | To get the error message in the error element.
+[Protected Routes](#Protected-Routes) |Pattern to protect the routes
+[Setup](#Setup-1) | Implementation Details
+[Navigate](#Navigate) | Component that is used to naviagte to another page
+[Parallel Loader Concept](#Parallel-Loader-Concept)| Discussion about Parallel Loader Concept.
+[Solution for Parallel Loaders](#Solution-for-Parallel-Loaders)| Solution for parallel loading
+[Show Message After Redirection](#Show-Message-After-Redirection)|Show message to user after quite redirection could be used at login page.
+[New Form and redirect Vs useNavigate](#New-Form)| Discussion about New form and redirect vs useNavigate
+[Form Component](#Form-Component) | Implementation of Form Component
+[Action Setup](#Action-Setup) | Implementation of Action
+[useActionData](#useActionData) | Get data that is returned from the Action Function
+[useNavigation](#useNavigation) | Show status of async operation like idle,running status.
+[Know Path](#Know-Path) | when you need to know where exactly user wanted to visit before redirecting him to the login page.
+[Deferring Data](#Deferring-Data) | Enhanse the ux while make apis call's for
+[Promises and defer()](#Promises-and-defer) | Mechnaisms used
+[Await](#Await) | warp the elements that need data after async behaviour is completed
+[Suspense](#Suspense) | React Hook to show fallback ui till the await components get rendered.
 
 
+### CodeSand Box Url:
+[CodeSand Box ](https://codesandbox.io/p/sandbox/react-router-d-api-youtube-rds8zz)
 
 
 
@@ -449,6 +461,8 @@ TO THIS
 - Add context prop to the Outlet and assign the data that you want to pass.
 
 ```
+// VanDetails.jsx
+
 <Outlet context={{currentVanApiData}}/>
 ```
 
@@ -589,7 +603,7 @@ console.log(searchParams.get('type')); // to get the value
 
 ### Link State
 
-- Imagine a website where you see all van types and using filter you find a van and then click back to Vans button to go back where you left have those filter applied as you input.
+- Imagine a website where you see all types of vans and using filter you find a van and then click on that single van, you get navigated to that van details page there you can see back button to go back to all vans ,when you click back button go back where you left having those filter applied.
 
 - Or it could also be the search bar senario where you type and go through the card and when you come back to the search bar your data is lost what you hae typed.
 
@@ -1113,7 +1127,7 @@ export async function auth() {
        navigate('/host',{replace:true});
       ```
 
-    - Here replace prop will remove the history from the stack. let's say we have used this in the login page and we navigated to the host page, Now using browser back button if we go back we won't visit the login page.
+    - Here replace prop will remove the history from the stack. let's say we have used this in the login page and we navigated to the host page, After logging in successfully going /host route as naviagte logic written in login page, Now using browser back button if we go back we won't visit the login page.
 
       1. First Dashboard.
       2. Login page
