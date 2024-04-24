@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">Easiest and Most Detailed Way to understand React Router Dom.</p>
-<p align="center" style="margin-bottom: 10px;">This Doc was prepared taking inspiration from Bob Ziroll, Scrimba’s Head of Education, to provide a quick guide to developers who have less time to go through the course again but I do recommend checking out the <a href="https://www.youtube.com/watch?v=nDGA3km5He4">Video</a></p> 
+<p align="center" style="margin-bottom: 10px;">This Doc was prepared taking inspiration from Bob Ziroll, Scrimba’s Head of Education, to provide a quick guide to developers who have less time to go through the course again but I do recommend checking out the <a href="https://www.youtube.com/watch?v=nDGA3km5He4">Video</a></p>
 
 &nbsp;
 &nbsp;
@@ -13,72 +13,68 @@
 &nbsp;
 &nbsp;
 
-
-
-| Module Name | Description |
-| --- | --- |
-| [Installation](#Installation) | Helps you install the react router package |
-| [Setup in React Project](#Setup-in-React-Project)| Helps you setup the react router dom. 
-| [Element VS Component](#Difference-between-Element-and-Component)|  Understand difference between Element and Component
-[Conditional Rendering in same url](#Conditional-Rendering-in-same-url)| Helps you conditional render the element.
-[Redirection Conditionally](#Redirection-Conditionally) | Help you to redirect user some where went conditons are not met.
-[Link](#Link) | Optimised Version of a href tag
-[Router Params](#Router-Params) | helps you get the data from the url parameter
-[Nested Routes](#Nested-Routes) | Use this when you want to share the common Ui between the same routes.
-[Layout Route](#Layout-Route) | Used in senarios where you want the certain component through out the Routes something like NavBar or Footer.
-[Outlet](#Outlet) | This will take the child route under the parent route and render on the screen when url matches.
-[Deep Nested Route](#Deep-Nested-Route) | Techniques to be used when you have deep nested routes.
-[Relative Routes](#Relative-Routes) | You donot need actually need to have that / at each level of path.
-[Index](#Index) | Used when you want to render child component with parent layouts as default.
-[NavLink](#NavLink)| Used for visual feedback the you opted for the path.
-[End](#End)| To restrict the Active route style.
-[Relative Links](#Relative-Links) | Same as Relative Routes but for NavLink/ Link.
-[Current Route ( . )](#Current-Route--) | suggested to use this approach for NavLink to be used for the indexed child route under the parent which shares same URL's
-[Relative Path](#Relative-Path) | This is used for the going back one level backward the path. from /vans/:id to /vans
-[Outlet Context](#Outlet-Context) | when you want pass data from the Parent route to child Routes.
-[useOutletContext](#useOutletContext)| Use this in child route component to get the data that is passed in the parent route context.
-[Search / Query Parameters](#Search---Query-Parameters) | use this when you wnat to extract data from the query parameter or set data in query parameters.
-[URLSearchParams (Not Related to React Router)](#URLSearchParams-Not-Related-to-React-Router) | Native way of extracti ng data form Url.
-[useSearchParams()](#useSearchParams) | implementation of useSearchParams.
-[Link State](#LinkState)| Mechanism to send state data to next page and use it when to try to route to back page. can be used in filters.
-[useLocation](#useLocation) | hook to get the state data that was passed
-[404 Error Page](#404-Error-Page) | use this when user tries to access the page that is not present.
-[Data Layer API](#Data-Layer-API) | Build optimised React App
-[Loaders](#Loaders) | function that runs before routing happens
-[Setup](#SETUP) | Implementation details
-[Transition from BrowserRouter to createBrowserRouter](#Transition-from-BrowserRouter-to-createBrowserRouter) |1st way of Implementation
-[Another way to transition](#Another-way-to-transition) | 2nd way of Implementation
-[Using Loaders](#Using-Loaders) | Implementation of Loaders
-[useLoaderData](#useLoaderData)|use this to get the data returned by the loader.
-[Loaders Params Feature](#Loaders-Params-Feature)| Passing Params to loader function.
-[Handling Errors](#Handling-Errors) | Helps you handle the error
-[Error while fetch happened](#Error-while-fetch-happened) | things to do while doing async operation like throwing error
-[errorElement](#errorElement) | Define element to show message to the user
-[useRouterError](#useRouterError) | To get the error message in the error element.
-[Protected Routes](#Protected-Routes) |Pattern to protect the routes
-[Setup](#Setup-1) | Implementation Details
-[Navigate](#Navigate) | Component that is used to naviagte to another page
-[Parallel Loader Concept](#Parallel-Loader-Concept)| Discussion about Parallel Loader Concept.
-[Solution for Parallel Loaders](#Solution-for-Parallel-Loaders)| Solution for parallel loading
-[Show Message After Redirection](#Show-Message-After-Redirection)|Show message to user after quite redirection could be used at login page.
-[New Form and redirect Vs useNavigate](#New-Form)| Discussion about New form and redirect vs useNavigate
-[Form Component](#Form-Component) | Implementation of Form Component
-[Action Setup](#Action-Setup) | Implementation of Action
-[useActionData](#useActionData) | Get data that is returned from the Action Function
-[useNavigation](#useNavigation) | Show status of async operation like idle,running status.
-[Know Path](#Know-Path) | when you need to know where exactly user wanted to visit before redirecting him to the login page.
-[Deferring Data](#Deferring-Data) | Enhanse the ux while make apis call's for
-[Promises and defer()](#Promises-and-defer) | Mechnaisms used
-[Await](#Await) | warp the elements that need data after async behaviour is completed
-[Suspense](#Suspense) | React Hook to show fallback ui till the await components get rendered.
-
-
-
+| Module Name                                                                                                   | Description                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| [Installation](#Installation)                                                                                 | Helps you install the react router package                                                                                 |
+| [Setup in React Project](#Setup-in-React-Project)                                                             | Helps you setup the react router dom.                                                                                      |
+| [Element VS Component](#Difference-between-Element-and-Component)                                             | Understand difference between Element and Component                                                                        |
+| [Conditional Rendering in same url](#Conditional-Rendering-in-same-url)                                       | Helps you conditional render the element.                                                                                  |
+| [Redirection Conditionally](#Redirection-Conditionally)                                                       | Help you to redirect user some where went conditons are not met.                                                           |
+| [Link](#Link)                                                                                                 | Optimised Version of a href tag                                                                                            |
+| [Router Params](#Router-Params)                                                                               | helps you get the data from the url parameter                                                                              |
+| [Nested Routes](#Nested-Routes)                                                                               | Use this when you want to share the common Ui between the same routes.                                                     |
+| [Layout Route](#Layout-Route)                                                                                 | Used in senarios where you want the certain component through out the Routes something like NavBar or Footer.              |
+| [Outlet](#Outlet)                                                                                             | This will take the child route under the parent route and render on the screen when url matches.                           |
+| [Deep Nested Route](#Deep-Nested-Route)                                                                       | Techniques to be used when you have deep nested routes.                                                                    |
+| [Relative Routes](#Relative-Routes)                                                                           | You donot need actually need to have that / at each level of path.                                                         |
+| [Index](#Index)                                                                                               | Used when you want to render child component with parent layouts as default.                                               |
+| [NavLink](#NavLink)                                                                                           | Used for visual feedback the you opted for the path.                                                                       |
+| [End](#End)                                                                                                   | To restrict the Active route style.                                                                                        |
+| [Relative Links](#Relative-Links)                                                                             | Same as Relative Routes but for NavLink/ Link.                                                                             |
+| [Current Route ( . )](#Current-Route--)                                                                       | suggested to use this approach for NavLink to be used for the indexed child route under the parent which shares same URL's |
+| [Relative Path](#Relative-Path)                                                                               | This is used for the going back one level backward the path. from /vans/:id to /vans                                       |
+| [Outlet Context](#Outlet-Context)                                                                             | when you want pass data from the Parent route to child Routes.                                                             |
+| [useOutletContext](#useOutletContext)                                                                         | Use this in child route component to get the data that is passed in the parent route context.                              |
+| [Search / Query Parameters](#Search---Query-Parameters)                                                       | use this when you wnat to extract data from the query parameter or set data in query parameters.                           |
+| [URLSearchParams (Not Related to React Router)](#URLSearchParams-Not-Related-to-React-Router)                 | Native way of extracti ng data form Url.                                                                                   |
+| [useSearchParams()](#useSearchParams)                                                                         | implementation of useSearchParams.                                                                                         |
+| [Link State](#LinkState)                                                                                      | Mechanism to send state data to next page and use it when to try to route to back page. can be used in filters.            |
+| [useLocation](#useLocation)                                                                                   | hook to get the state data that was passed                                                                                 |
+| [404 Error Page](#404-Error-Page)                                                                             | use this when user tries to access the page that is not present.                                                           |
+| [Data Layer API](#Data-Layer-API)                                                                             | Build optimised React App                                                                                                  |
+| [Loaders](#Loaders)                                                                                           | function that runs before routing happens                                                                                  |
+| [Setup](#SETUP)                                                                                               | Implementation details                                                                                                     |
+| [Transition from BrowserRouter to createBrowserRouter](#Transition-from-BrowserRouter-to-createBrowserRouter) | 1st way of Implementation                                                                                                  |
+| [Another way to transition](#Another-way-to-transition)                                                       | 2nd way of Implementation                                                                                                  |
+| [Using Loaders](#Using-Loaders)                                                                               | Implementation of Loaders                                                                                                  |
+| [useLoaderData](#useLoaderData)                                                                               | use this to get the data returned by the loader.                                                                           |
+| [Loaders Params Feature](#Loaders-Params-Feature)                                                             | Passing Params to loader function.                                                                                         |
+| [Handling Errors](#Handling-Errors)                                                                           | Helps you handle the error                                                                                                 |
+| [Error while fetch happened](#Error-while-fetch-happened)                                                     | things to do while doing async operation like throwing error                                                               |
+| [errorElement](#errorElement)                                                                                 | Define element to show message to the user                                                                                 |
+| [useRouterError](#useRouterError)                                                                             | To get the error message in the error element.                                                                             |
+| [Protected Routes](#Protected-Routes)                                                                         | Pattern to protect the routes                                                                                              |
+| [Setup](#Setup-1)                                                                                             | Implementation Details                                                                                                     |
+| [Navigate](#Navigate)                                                                                         | Component that is used to naviagte to another page                                                                         |
+| [Parallel Loader Concept](#Parallel-Loader-Concept)                                                           | Discussion about Parallel Loader Concept.                                                                                  |
+| [Solution for Parallel Loaders](#Solution-for-Parallel-Loaders)                                               | Solution for parallel loading                                                                                              |
+| [Show Message After Redirection](#Show-Message-After-Redirection)                                             | Show message to user after quite redirection could be used at login page.                                                  |
+| [New Form and redirect Vs useNavigate](#New-Form)                                                             | Discussion about New form and redirect vs useNavigate                                                                      |
+| [Form Component](#Form-Component)                                                                             | Implementation of Form Component                                                                                           |
+| [Action Setup](#Action-Setup)                                                                                 | Implementation of Action                                                                                                   |
+| [useActionData](#useActionData)                                                                               | Get data that is returned from the Action Function                                                                         |
+| [useNavigation](#useNavigation)                                                                               | Show status of async operation like idle,running status.                                                                   |
+| [Know Path](#Know-Path)                                                                                       | when you need to know where exactly user wanted to visit before redirecting him to the login page.                         |
+| [Deferring Data](#Deferring-Data)                                                                             | Enhanse the ux while make apis call's for                                                                                  |
+| [Promises and defer()](#Promises-and-defer)                                                                   | Mechnaisms used                                                                                                            |
+| [Await](#Await)                                                                                               | warp the elements that need data after async behaviour is completed                                                        |
+| [Suspense](#Suspense)                                                                                         | React Hook to show fallback ui till the await components get rendered.                                                     |
+| [Refresh Data using loaders](#Refresh-Data-using-loaders)                                                     | Help to refresh data again from the loader even after the entire page has been loaded.                                     |
 
 ### Installation
 
 ```
-npm install react-router-dom 
+npm install react-router-dom
 ```
 
 ### Setup in React Project
@@ -120,14 +116,14 @@ return (
 
 ```
 <Route path="/" Component={Home}></Route>
- ```
+```
 
 ### Conditional Rendering in same url
 
 - Element to render JSX
 
 ```
-<Route path="/login" element={loggedInStatus?<LoginPage></LoginPage>:"Hello"}></Route> 
+<Route path="/login" element={loggedInStatus?<LoginPage></LoginPage>:"Hello"}></Route>
 ```
 
 - Component- Should only provide/render component neither JSX nor <></>
@@ -181,7 +177,7 @@ export default PrivateRoute;
 - Use this to navigate through URL without page Refresh.
 
 ```
-<Link to="/home"> <li>Home</li> </Link> 
+<Link to="/home"> <li>Home</li> </Link>
 ```
 
 ### Router Params
@@ -204,6 +200,7 @@ console.log(params.type) /// will give you the type
 ### Nested Routes
 
 - Nested Urls:
+
   - /vans
   - /vans/types
 
@@ -296,7 +293,7 @@ export const Layout=()=>{
       <Route path="about" element={<About/>}></Route>
 
       <Route path="host" element={<HostLayout/>}>
-              <Route index element={<Dashboard/>}></Route> 
+              <Route index element={<Dashboard/>}></Route>
               <Route path="income" element={<Income/>}></Route>
               <Route path="reviews" element={<Reviews/>}></Route>
       </Route>
@@ -337,7 +334,7 @@ const activeStyle={
 
 ```
 <Route path="host" element={<HostLayout/>}>
-              <Route index element={<Dashboard/>}></Route> 
+              <Route index element={<Dashboard/>}></Route>
               <Route path="income" element={<Income/>}></Route>
               <Route path="reviews" element={<Reviews/>}></Route>
       </Route>
@@ -360,7 +357,7 @@ const activeStyle={
       <Route path="about" element={<About/>}></Route>
 
       <Route path="host" element={<HostLayout/>}>
-              <Route index element={<Dashboard/>}></Route> 
+              <Route index element={<Dashboard/>}></Route>
               <Route path="income" element={<Income/>}></Route>
               <Route path="reviews" element={<Reviews/>}></Route>
       </Route>
@@ -416,7 +413,7 @@ TO THIS
 
 ```
 <Route path="host" element={<HostLayout/>}>
-              <Route index element={<Dashboard/>}></Route> 
+              <Route index element={<Dashboard/>}></Route>
               <Route path="income" element={<Income/>}></Route>
               <Route path="reviews" element={<Reviews/>}></Route>
               <Route path='/vans' element={<HostVans/>}></Route>
@@ -441,7 +438,7 @@ TO THIS
 - we can do this by:
 
 ```
-<Link to='..' relative="path" >Go Back</Link> 
+<Link to='..' relative="path" >Go Back</Link>
 ```
 
 ### Outlet Context
@@ -566,6 +563,7 @@ console.log(searchParams.get('type')); // to get the value
 - But if your URL: <http://localhost:3000/vans?type=rugged> then output will be `rugged`
 
   - To **Set** the query params value:
+
     - First Way:
 
       ```
@@ -574,28 +572,31 @@ console.log(searchParams.get('type')); // to get the value
       <Link to=''> Clear Fliter </Link>
       OR
       <Link to=".">Clear All</Link>
-      // this will just replace the existing query param and add new 
+      // this will just replace the existing query param and add new
       ```
 
     - Second Way:
+
       - Using setter function that we already have declared.
 
         ```
-        <button onClick={()=>setSearchParams("type=rugged")}>Rugged</button> 
-        <button onClick={()=>setSearchParams("type=Smooth)}>Smooth</button> 
-        <button onClick={()=>setSearchParams("")}>Clear All</button> 
+        <button onClick={()=>setSearchParams("type=rugged")}>Rugged</button>
+        <button onClick={()=>setSearchParams("type=Smooth)}>Smooth</button>
+        <button onClick={()=>setSearchParams("")}>Clear All</button>
         ```
 
         OR
 
         ```
-        <button onClick={()=>setSearchParams({type:"rugged"})}>Rugged</button> 
-        <button onClick={()=>setSearchParams({type="Smooth"})}>Smooth</button> 
-        <button onClick={()=>setSearchParams({})}>Clear All</button> 
+        <button onClick={()=>setSearchParams({type:"rugged"})}>Rugged</button>
+        <button onClick={()=>setSearchParams({type="Smooth"})}>Smooth</button>
+        <button onClick={()=>setSearchParams({})}>Clear All</button>
         ```
 
     - Third Way:
+
       - If you look at the above 2 approaches we are losing our query params as soon as we clikc another one. So how to do **Merging Query Params**.
+
         - First Way (NATIVE WAY):
 
           ![Alt text](image-3.png)
@@ -605,9 +606,9 @@ console.log(searchParams.get('type')); // to get the value
           ![Alt text](image-4.png)
 
           ```
-          <button onClick={()=>handleFilterChange("type","sith")}>Sith</button> 
-          <button onClick={()=>handleFilterChange("type","Jim")}>Jim</button> 
-          <button onClick={()=>handleFilterChange("type","null")}>Sith</button> 
+          <button onClick={()=>handleFilterChange("type","sith")}>Sith</button>
+          <button onClick={()=>handleFilterChange("type","Jim")}>Jim</button>
+          <button onClick={()=>handleFilterChange("type","null")}>Sith</button>
           ```
 
 ### Link State
@@ -639,7 +640,7 @@ console.log(location)
 
 const search= location.state?.search || "";
 
-// inside return 
+// inside return
 <Link to={..${search}}></Link>
 
 
@@ -669,7 +670,7 @@ const search= location.state?.search || "";
 
 - Here we will be loading the data first and then upon checking the data we will route the user to that path.
 
-- If you see traditionally we always route the user to a specific path first and then start loading the data and with this approach there is alot of boilerplate code  at different routes for checking the loading state, error handling state and data handling state.
+- If you see traditionally we always route the user to a specific path first and then start loading the data and with this approach there is alot of boilerplate code at different routes for checking the loading state, error handling state and data handling state.
 
 ### Loaders
 
@@ -678,7 +679,7 @@ const search= location.state?.search || "";
 
 - But here at Loader there will be slight delay in going to the specific url/route because loaders will first load data first and upon reciving data only it will go to that route which was requested.
 
-To use the Data Layer Api in our app we need to make some changes in our App.js file where we have wrapped the routes with `<BrowserRouter></BrowserRouter>`  and BrowserRouter donot support the DataLayer Api.
+To use the Data Layer Api in our app we need to make some changes in our App.js file where we have wrapped the routes with `<BrowserRouter></BrowserRouter>` and BrowserRouter donot support the DataLayer Api.
 
 #### SETUP
 
@@ -695,7 +696,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
   },
-  
+
 ]);
 
 export default router;
@@ -722,7 +723,7 @@ root.render(<RouterProvider router={router} />);
 
 #### Transition from BrowserRouter to createBrowserRouter
 
-- If you look at the  code we have written in broswer this how code will look like.
+- If you look at the code we have written in broswer this how code will look like.
 
 FROM THIS
 
@@ -789,7 +790,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App/>)
 - Add the loader function that has data that could also be the API fetch function.
 
 ```
-//Home.jsx 
+//Home.jsx
 
 export function loader() {
   return "The data is here";
@@ -871,7 +872,7 @@ const Home = () => {
 
 ### Handling Errors
 
-- Let say while fetch data from the api if an error  happen how can we handle it.
+- Let say while fetch data from the api if an error happen how can we handle it.
 
 #### Error while fetch happened
 
@@ -891,9 +892,9 @@ export const dataFetchApi = async () => {
 - At the route itself we can add another prop called errorElement.
 
 ```
-<Route 
+<Route
       path="/home"
-      element={<Home/>} 
+      element={<Home/>}
       errorElement={<h1>some went wrong</h1>}>
  </Route>
 ```
@@ -993,7 +994,7 @@ const router = createBrowserRouter(
 
 #### Security Issue
 
-- here the issue as loaders are running paralley even though protected route auth logic navigated the user back to login page as the nested route loader ran parallely if it has the api calls we can see the results  in Developer tools.
+- here the issue as loaders are running paralley even though protected route auth logic navigated the user back to login page as the nested route loader ran parallely if it has the api calls we can see the results in Developer tools.
 
 **Example**:
 Here if you notice i have wrapped my child routes with AuthRequired component where it has the auth logic even though AuthRequired component is doing validation even though authentication failed but still loader inside the /About got executed.
@@ -1028,7 +1029,7 @@ export const loader({params}){
 It is better to add individual loader for each route.
 
 ```
-// in app.jsx 
+// in app.jsx
 
 <Route path="/vanDetails element={VanDetails} loader={async()=>{return await auth()}}/>
 
@@ -1056,7 +1057,6 @@ export async function loader() {
   return dataFetchApi();
 }
 ```
-
 
 ### Show Message After Redirection
 
@@ -1096,6 +1096,7 @@ export async function auth() {
 ```
 
 - **Consume the message**:
+
   - To Consume the message in the component.
   - we can use **useSearchParams** something like this.
 
@@ -1124,7 +1125,8 @@ export async function auth() {
 - So to solve this react router came up with new solution.
 
   - #### useNavigate
-      - This is a hook provided by react router dom.
+
+    - This is a hook provided by react router dom.
 
     - If you want to navigate user to any specific page in a programmatic logic you have written where there no ui involved just a pure JS function.
 
@@ -1143,130 +1145,243 @@ export async function auth() {
       3. After login navigated to host page now click back button you will navigated to Dashboard Page
 
   **Difference between useNaviagte and redirect**:
-    -  **useNavigate** is hook provided by react router dom and these must be used at top level of the component. (i have tired this doesn't worked out of the component)
-  
+
+  - **useNavigate** is hook provided by react router dom and these must be used inside the component. (i have tired this doesn't worked outside of the component)
+
   ![Alt text](image-8.png)
-    - if you have any functions that are not part of the component like loaders or actions (have discussed below) then  use **redirect**.
+
+  - if you have any functions that are not part of the component like loaders or actions (have discussed below) then use **redirect**.
 
 #### Form Component
 
 - React router dom has form component we can use this instead of the native form.
 
-  ```
+  ```jsx
   // Login.jsx
 
-  import {Form} from 'react-router-dom';
+  import { Form } from "react-router-dom";
   <Form>
-        <input
-          type="text"
-          name="username"
-          placeholder="username"
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-        />
+    <input type="text" name="username" placeholder="username" />
+    <input type="password" name="password" placeholder="password" />
+    <button>Login</button>
+  </Form>;
+  ```
+
+- **Method And Action:**
+
+  - Just like traditional form react-router-dom's Form component also has method and action properties.
+
+  **Method:**
+
+  **GET:**
+
+  - By default if you donot provide any method property then it assumes as GET Method.
+  - And now when you submit any data over here data that you have entered will be placed on the url as query params.
+  - Loader optional and Action is not required.
+
+  ```jsx
+  <Form>
+    <input type="text" name="username" placeholder="username" />
+    <input type="password" name="password" placeholder="password" />
+    <button>Login</button>
+  </Form>
+  ```
+
+  OR
+
+  ```jsx
+  <Form method="GET">
+    <input type="text" name="username" placeholder="username" />
+    <input type="password" name="password" placeholder="password" />
+    <button>Login</button>
+  </Form>
+  ```
+
+  Output:
+
+  `https://rds8zz.csb.app/new-login?username=stars&password=5`
+
+  **POST**:
+
+  - if you add method post in the form tag then your data will not be visible on the query params.
+  - But you need to have action declared in the Route and action function must be also defined or else it will throw the error.
+  - Loader optional and Action required.
+
+  ```jsx
+  /// Login.jsx
+  export async function hotelsFilterAction({ request, params }) {
+    const formData = await request.formData();
+    const username = formData.get("username");
+    const password = formData.get("password");
+    return { username, password };
+  }
+
+  const LoginComp = () => {
+    return (
+      <Form method="POST">
+        <input type="text" name="username" placeholder="username" />
+        <input type="password" name="password" placeholder="password" />
         <button>Login</button>
       </Form>
+    );
+  };
+
+  //App.jsx
+  <Route
+    action={hotelsFilterAction}
+    path="/new-login"
+    element={<LoginPage1 />}
+  />;
+  ```
+
+  **Action**:
+
+  **GET**
+
+  - Here Action property in Form will submit the form data to the url that is defined in the action.
+
+  ```jsx
+  <Form method="GET" action="/home">
+    <input type="text" name="username" placeholder="username" />
+    <input type="password" name="password" placeholder="password" />
+    <button>Login</button>
+  </Form>
+  ```
+
+  - Now element that is rendered on path /home will receive the query params
+    `https://rds8zz.csb.app/home?username=stars&password=5`
+
+  **POST:**
+
+  - Now here if you have form with method POST and action defined then the action and action function must be implemented to the action declared path.
+
+  ```jsx
+  //Login.jsx
+
+  <Form method="POST" action="/home">
+    <input type="text" name="username" placeholder="username" />
+    <input type="password" name="password" placeholder="password" />
+    <button>Login</button>
+  </Form>
+
+  // App.jsx
+  <Route
+    action={Homeaction}
+    path="/home"
+    element={<Home />}
+  />
+
+  //Home.jsx
+
+   export async function Homeaction({ request, params }) {
+    const formData = await request.formData();
+    const username = formData.get("username");
+    const password = formData.get("password");
+    return { username,password };
+  }
+
+  ```
+
+  ```text
+  Form--- GET Method-- loader(optional), Action in route not required
+  Form ---POST Method -- loader(optional), Action in route required.
   ```
 
 - **Action Setup**:
+
   - Just like loader function we can define the action function.
 
-      ```
-      // login.jsx
+    ```jsx
+    // login.jsx
 
-        export async function action() {
-        console.log("login function");
-        return null;
-        }
-
-      // App.jsx
-
-      <Route
-        action={action}
-        loader={loginLoader}
-        path="/login"
-        element={<LoginPage />}
-      />  
-      ```
-      - whenever any button is clicked inside the form then the action function would get executed.
-
-      ``` 
-      export async function action(obj) {
-        console.log("login function", obj);
-        return null;
-    }
-      ```
-
-      - here an object that action prop provides
-
-      ``` 
-      export async function action(obj) {
-      console.log("login function", obj);
-       O/P: {
-        "request": {},
-        "params": {}
-    }
+    export async function action() {
+      console.log("login function");
       return null;
     }
-      ```
-      - **Params in Action:**
-      ``` 
-      <Route
+
+    // App.jsx
+
+    <Route
+      action={action}
+      loader={loginLoader}
+      path="/login"
+      element={<LoginPage />}
+    />;
+    ```
+
+    - whenever any button is clicked inside the form then the action function would get executed.
+
+    ```jsx
+    export async function action(obj) {
+      console.log("login function", obj);
+      return null;
+    }
+    ```
+
+    - here an object that action prop provides
+
+    ```jsx
+    export async function action(obj) {
+      console.log("login function", obj);
+      // O/P: {"request": {},"params": {}}
+      return null;
+    }
+    ```
+
+    - **Params in Action:**
+
+    ```jsx
+    <Route
       action={action}
       loader={loginLoader}
       path="/login/:id"
       element={<LoginPage />}
-    /> 
+    />;
 
-      export async function action(obj) {
+    export async function action(obj) {
       console.log("login function", obj);
-      O/P: {
-        "request": {},
-        "params": {
-          "id":1
-        }
-      }
+      //{"request": {},"params": {"id":1}}
       return null;
-      }
+    }
+    ```
 
-      ```
     - **Request in Action:**
-    To get the data that you have entered in the form make sure your form have name props and you can get the entered values by...
+      To get the data that you have entered in the form make sure your form have name props and you can get the entered values by...
 
-    ``` 
+    ```jsx
     export async function action({ request, params }) {
       const formData = await request.formData();
       const username = formData.get("username");
       const password = formData.get("password");
       console.log(username, password);
-       return redirect("/");
+      return redirect("/");
     }
     ```
+
 - let say you have logged in successfully and routed at / using redirect but if you click back button on browser it again take back to the login page.
 
-   - **History Stack**:
-     - Browser have something like history stack where on each page route your page gets add to stack and when you do redirect to / path from /login. So now in the stack / path is placed on top of /login.
+  - **History Stack**:
+    - Browser have something like history stack where on each page route your page gets add to stack and when you do redirect to / path from /login. So now in the stack / path is placed on top of /login.
   - **Replace in Form**:
-      - React router dom Forms have a prop called replace which works similar to replace in Navigate.
 
-      ``` 
-      <Form method="POST" replace>
-        <input type="text" name="username" placeholder="username" />
-        <input type="password" name="password" placeholder="password" />
-        <button>Login</button>
-        <button>helloo</button>
-      </Form>
-      ``` 
+    - React router dom Forms have a prop called replace which works similar to replace in Navigate.
+
+    ```jsx
+    <Form method="POST" replace>
+      <input type="text" name="username" placeholder="username" />
+      <input type="password" name="password" placeholder="password" />
+      <button>Login</button>
+      <button>helloo</button>
+    </Form>
+    ```
+
 ### useActionData:
 
 - Now lets say we have action function which will make an api call to check the credentails of the user ie username and password what if the credentials are incorrect how can we handle it and show proper error message to the user.
 
 - what if something like this happen
 
-``` 
+```jsx
 export async function action({ request, params }) {
   const formData = await request.formData();
   const username = formData.get("username");
@@ -1279,7 +1394,7 @@ export async function action({ request, params }) {
 
 - No problem we can handle this by returning it like this.
 
-``` 
+```jsx
 export async function action({ request, params }) {
   const formData = await request.formData();
   const username = formData.get("username");
@@ -1288,11 +1403,13 @@ export async function action({ request, params }) {
   return "NOT OK";
 }
 ```
+
 #### useActionData:
+
 - similar to useLoaderData.
 
-```
-// login.jsx 
+```jsx
+// login.jsx
 const error = useActionData();
 
 // inside return
@@ -1301,16 +1418,18 @@ const error = useActionData();
 ```
 
 ### useNavigation:
+
 - let say you are using a state called status that will show on button something like login or logging in when you click on login button.
 
 - as we are doing the api calls in the action function how can we know the status then.
-####  useNavigation:
+
+#### useNavigation:
 
 - here is where useNavigation will come handy it gives us the clear status of any loader/action that is running or idle.
 
 - Declare this inside the component.
 
-``` 
+```jsx
 const navigation = useNavigation();
 console.log(navigation); O/P: { "state": "idle" }
 ```
@@ -1320,8 +1439,9 @@ console.log(navigation); O/P: { "state": "idle" }
 - Let say you put twitter/setting url in the browser and hit enter because as you are not logged in you will be navigated to loggin page and after successfully logging we should navigate the user to the /settings path not / home page.
 
 - So we some how need to know what exactly user wanted to visit before redirecting him to the login page.
-- Here when you try to enter about page as authentication is there you will be navigated to the login page at same time we will be putting /about path  in login url
-``` 
+- Here when you try to enter about page as authentication is there you will be navigated to the login page at same time we will be putting /about path in login url
+
+```jsx
 <Route
   path="/About"
   loader={async ({ request }) => {
@@ -1334,9 +1454,9 @@ console.log(navigation); O/P: { "state": "idle" }
   element={<About />}
 />
 ```
-``` 
-// auth.js
 
+```jsx
+// auth.js
 
 import { redirect } from "react-router-dom";
 
@@ -1353,7 +1473,8 @@ export async function auth(request) {
   return null;
 }
 ```
-```
+
+```jsx
 // loginPage.jsx
 
 export async function action({ request, params }) {
@@ -1372,73 +1493,53 @@ export async function action({ request, params }) {
   // return redirect("/");
 }
 ```
+
 ### Deferring Data:
+
 - if you look at the current data layer apis where loader function are found that would fetch data from the server so due to this we can see that our page has got some what stuck and there is not feed back to the user saying that it is loading.
 
-
 #### Promises and defer():
-  - **Defer**:
-    - When you use defer in your loader function by returning it.
-    - Traditionally before routing page and loading ui in data layer api's first loader functions are loaded and then page is routed.
-    - But if we defer first page will be routed and then loader will run.
 
-    Change Loader from this 
-    ``` 
-    export async function loader(request) {
-      await auth(request);
-      return await dataFetchApi();
-    }
-    ```
-    TO THIS:
-    
-    ``` 
-    export async function loader(request) {
-      await auth(request);
-      console.log(dataFetchApi()); //Promise
-      const dataPromise=dataFetchApi();
-      return defer({data:dataPromise}) ;
-    }
-    ```
+- **Defer**:
 
-    #### Await:
-    - it is component provided by react router dom.
+  - When you use defer in your loader function by returning it.
+  - Traditionally before routing page and loading ui in data layer api's first loader functions are loaded and then page is routed.
+  - But if we defer first page will be routed and then loader will run.
 
-    - It can be used to surround the code where we expect that async behaviour of code and it will conditionally render once the data is loaded.
+  Change Loader from this
 
-    ``` 
-    const Home = () => {
-      const data = useLoaderData();
-      console.log(data); /// O/P: {data:Promise}
+  ```jsx
+  export async function loader(request) {
+    await auth(request);
+    return await dataFetchApi();
+  }
+  ```
 
-      return (
-        <div>
-          <h1>Hello From Home</h1>
-          <Await resolve={data.data}>
-            {(loadedData) => {
-              console.log(loadedData);
-              return (
-                <>
-                  <ul>
-                    {loadedData.map((item) => (
-                      <li key={item.id}>{item.name}</li>
-                    ))}
-                  </ul>
-                </>
-              );
-            }}
-          </Await>
-        </div>
-      );
-    };
+  TO THIS:
 
-    export default Home;
-    ```
-    #### Suspense:
-     - It lets you display a fallback untill its children have finished Loading.
-     - here you will use this to wrap your Await component.
+  ```jsx
+  export async function loader(request) {
+    await auth(request);
+    console.log(dataFetchApi()); //Promise
+    const dataPromise = dataFetchApi();
+    return defer({ data: dataPromise });
+  }
+  ```
 
-     ``` 
-      <React.Suspense fallback={<h2>Loading Data Please wait</h2>}>
+  #### Await:
+
+  - it is component provided by react router dom.
+
+  - It can be used to surround the code where we expect that async behaviour of code and it will conditionally render once the data is loaded.
+
+  ```jsx
+  const Home = () => {
+    const data = useLoaderData();
+    console.log(data); /// O/P: {data:Promise}
+
+    return (
+      <div>
+        <h1>Hello From Home</h1>
         <Await resolve={data.data}>
           {(loadedData) => {
             console.log(loadedData);
@@ -1453,18 +1554,46 @@ export async function action({ request, params }) {
             );
           }}
         </Await>
-      </React.Suspense>
-     ```
+      </div>
+    );
+  };
 
-     - This will load the **Loading data please wait** message will be shown to the users untill unless data is fetched.
+  export default Home;
+  ```
 
-     **Note**: if you have any interdependent loader where you have 2 loaders one loader is dependent on another then agian you can make you loader function async and make one of the loader await. so this means route transition will not start untill unless await loader (user:await userpromise) as completed once that is completed data loading it make route transition and remaining sync loaders will caught at suspense and loading state will be showed.
+  #### Suspense:
 
-     ``` 
-      export async function loader(){
-        return defer({data:dataPromise,user:await userpromise})
-      }
-     ```
+  - It lets you display a fallback untill its children have finished Loading.
+  - here you will use this to wrap your Await component.
+
+  ```jsx
+  <React.Suspense fallback={<h2>Loading Data Please wait</h2>}>
+    <Await resolve={data.data}>
+      {(loadedData) => {
+        console.log(loadedData);
+        return (
+          <>
+            <ul>
+              {loadedData.map((item) => (
+                <li key={item.id}>{item.name}</li>
+              ))}
+            </ul>
+          </>
+        );
+      }}
+    </Await>
+  </React.Suspense>
+  ```
+
+  - This will load the **Loading data please wait** message will be shown to the users untill unless data is fetched.
+
+  **Note**: if you have any interdependent loader where you have 2 loaders one loader is dependent on another then agian you can make you loader function async and make one of the loader await. so this means route transition will not start untill unless await loader (user:await userpromise) as completed once that is completed data loading it make route transition and remaining sync loaders will caught at suspense and loading state will be showed.
+
+  ```jsx
+  export async function loader() {
+    return defer({ data: dataPromise, user: await userpromise });
+  }
+  ```
 
 ### Browser Router VS Hash Router:
 
@@ -1480,6 +1609,7 @@ Because of this behavior, the server never sees the route change, and it always 
 The difference is that with HashRouter, React Router detects the change in the URL hash and updates the UI accordingly.
 
 **Summary**:
+
 - Both BrowserRouter and HashRouter serve the same purpose of enabling client-side routing in a React app.
 - The difference lies in how they interact with the browser and the server.
 - BrowserRouter uses the HTML5 History API for clean URLs and sends requests to the server for each route change.
@@ -1499,12 +1629,13 @@ HashRouter: Doesn't send requests to the server on router change.
 **Use Case:** When you have control over the server and can configure it to serve your React app correctly for any requested URL.
 
 **Example Scenarios:**
+
 - Applications where clean URLs without hashes are desired.
 - Applications hosted on servers where you can configure server-side routing (like Express.js, Apache, Nginx, etc.).
 - Environments where SEO (Search Engine Optimization) is a concern, as search engines typically prefer clean URLs.
 
-
 **HashRouter:**
+
 - **Use Case:** When you're deploying your app to platforms where server configuration is limited or you can't configure server-side routing.
 - Example Scenarios:
 - Hosting on platforms like GitHub Pages, where direct server-side routing configuration isn't possible.
@@ -1533,13 +1664,12 @@ You can also consider using BrowserRouter for development and HashRouter for pro
 Both routers offer the same functionality regarding client-side routing, so consider your specific functional requirements.
 If you need advanced routing capabilities, both routers support that, but you might prefer BrowserRouter for its cleaner URLs.
 
-
-
 By evaluating these factors, you can decide whether to use BrowserRouter or HashRouter based on your project's requirements, hosting environment, and development constraints.
 
 That's correct! Let me clarify:
 
 - **HashRouter Compatibility**:
+
   - HashRouter works in any environment, regardless of server-side routing configuration, because it doesn't rely on server-side routing.
   - You can use HashRouter in any hosting environment, including platforms like AWS S3, where server-side routing configuration isn't available.
 
@@ -1550,7 +1680,106 @@ That's correct! Let me clarify:
 So, in essence:
 
 - **HashRouter** is more versatile and can be used in any environment, making it a reliable choice for deployments where server-side routing isn't feasible or desired.
-  
 - **BrowserRouter** requires server-side routing configuration and is suitable for environments where such configuration is possible, offering clean URLs and SEO benefits when used appropriately.
 
 Therefore, you're correct in saying that where BrowserRouter can work, HashRouter can also work, but the opposite isn't always true. BrowserRouter requires specific server-side configurations, making it less flexible than HashRouter in certain hosting environments.
+
+### Refresh Data using loaders
+
+#### Using useNavigate:
+
+```javascript
+const navigate = useNavigate();
+
+<button onClick={() => navigate(".", { replace: true })}>Refresh</button>;
+```
+
+The main difference between the two approaches lies in how the form submission is handled:
+
+1. **Using `onSubmit` with Custom Handling**:
+
+   - This approach relies on React's event system to handle form submission.
+   - You define a custom `handleSubmit` function that performs any necessary actions, such as form validation or sending data to a server.
+   - You can prevent the default form submission behavior using `e.preventDefault()` within the `handleSubmit` function.
+   - This approach gives you full control over what happens when the form is submitted, allowing for custom validation, data processing, or any other actions you need to perform.
+
+2. **Using `action` and `method` Attributes**:
+   - This approach is more traditional and aligns with HTML form behavior.
+   - You specify a URL in the `action` attribute where the form data should be sent, and a method in the `method` attribute (typically `"post"` or `"get"`).
+   - When the form is submitted, the browser sends a request to the URL specified in `action` with the form data, using the HTTP method specified in `method`.
+   - This approach is simpler and requires less code, especially for basic form submissions without custom handling.
+   - It's suitable when you just need to send data to a server without much manipulation or validation on the client side.
+
+Choosing between these approaches depends on the requirements of your project:
+
+- **Custom Handling (`onSubmit`)**:
+
+  - Use when you need to perform custom validation, data manipulation, or any actions before submitting the form.
+  - Provides more control over the submission process.
+  - Suitable for complex forms or when you need to integrate with state management libraries like Redux.
+
+- **Using `action` and `method`**:
+  - Use for simple form submissions where you just need to send data to a server without much manipulation.
+  - Requires less code and is more straightforward for basic use cases.
+  - Suitable when you don't need to manage the form state extensively in your React component.
+
+In summary, the `onSubmit` approach with custom handling gives you more flexibility and control, while using `action` and `method` attributes is simpler and more traditional, appropriate for basic form submissions.
+
+When you use `action` and `method` attributes in your form, the browser performs a traditional form submission, which typically results in a page reload.
+
+- **Using `action` and `method`**: The browser sends a request to the URL specified in the `action` attribute, using the method specified in the `method` attribute (usually POST or GET). This often results in a page reload, especially if the server sends back a response.
+
+- **Using `onSubmit` with Custom Handling**: By using `e.preventDefault()` in your custom `handleSubmit` function, you prevent the default form submission behavior. You can then handle the form submission entirely within your React component, without causing a page reload.
+
+So, if you want to avoid page reloads and handle the form submission entirely in your React component, you should use `onSubmit` with custom handling. This allows you to perform actions like validation, data processing, or sending data to a server via AJAX requests without causing a full page reload.
+
+### useSubmit:
+
+- The imperative version of Form that lets you, the programmer submit a form instead of the user.
+
+```jsx
+import { useSubmit, Form } from "react-router-dom";
+
+function SearchField() {
+  let submit = useSubmit();
+  return (
+    <Form
+      onChange={(event) => {
+        submit(event.currentTarget);
+      }}
+    >
+      <input type="text" name="search" />
+      <button type="submit">Search</button>
+    </Form>
+  );
+}
+
+// SAME AS
+<Form method="GET">// ...</Form>;
+```
+
+- Here loader function is executed every time submit function is invoked.
+
+```jsx
+const someFun = (event) => {
+  submit(event.currentTarget.form, {
+    method: "post",
+    action: "/city/hotels",
+  });
+};
+
+<Form>
+  <input type="text" name="something" onChange={someFun} />
+</Form>;
+
+// SAME AS
+
+<Form method="POST" action='/city/hotels'>
+<input type="text" name="something" onChange={someFun} />
+<button>Submit</button>
+</Form>
+
+```
+**Learn More About Method and Action in:**
+
+[Form Component](#form-component)
